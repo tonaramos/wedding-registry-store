@@ -1,0 +1,82 @@
+{
+  "kind": "registry",
+  "data": {
+    "name": "Alberto & Daniela",
+    "shortname": "A & D",
+    "items": [
+      {
+        "brand": "Sag Harbor",
+        "name": "Tall Cabinet",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/6/optimized/3678016_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "1169",
+        "description": "The classic framing and lightly distressed off-white finish of this tall cabinet give it a charming, vintage appearance while its large cabinets provide plenty of room for your wardrobe.",
+        "quantityAvailable": "2"
+      },
+      {
+        "brand": "Ultima",
+        "name": "Carson King Faux Leather Upholstered Platform Bed Frame",
+        "imageUrl": "https://images.prod.meredith.com/product/58583d947bb605f1a7a0abae03a3d3d4/1518754522681/l/king-upholstered-bed-cappuccino-faux-leather",
+        "price": "563",
+        "description": "The Ultima Carson Upholstered Faux Leather Platform Bed Fame is both classic and modern. Its versatile style will accentuate a wide variety of furnishings and decor. Featuring sleek simulated leather and an ultramodern silhouette, this padded platform bed frame will effortlessly complete any bedroom or loft setting.",
+        "quantityAvailable": "1"
+      },
+      {
+        "brand": "Sealy",
+        "name": "Plush Memory Foam Mattress, Quick Ship, Mattress in a Box- King",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/9783249_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "899",
+        "description": "Sealy's to Go 12'' Memory Foam Mattress brings together a unique combination of three distinct foam layers, creating a supremely plush feel that both comforts the body and provides essential support. Shipped directly to your door, this mattress offers convenience as well.",
+        "quantityAvailable": "2"
+      },
+      {
+        "brand": "Charter Club",
+        "name": "European White Down Lightweight King Comforter",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/3962569_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "380",
+        "description": "An ideal choice for year-round comfort and warmth, this comforter from Charter Club features a lightweight design and super-soft European down fill.",
+        "quantityAvailable": "1"
+      },
+      {
+        "brand": "Madison Park",
+        "name": "Geneva 6-Pc. Quilted King/California King Coverlet Set",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/3/optimized/9627873_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "280",
+        "description": "Keep your bedroom's look and feel classic and cozy with the dramatic damask-style print and super-soft quilted design of this Geneva coverlet set from Madison Park.",
+        "quantityAvailable": "1"
+      },
+      {
+        "brand": "Pillow Genius",
+        "name": "Down Alternative Side & Back Sleeper Overstuffed Pillow with MicronOne Technology, Set of 2 - King",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/11564059_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "209",
+        "description": "This is the Pillow Genius Pillow. Filled with our superior cool, hypoallergenic Poly Gel Fiber and built to last. It's covered in a soft-brushed microfiber shell with Micron One Technology and encased in our exclusive pillow protector dyed in Pillow Guy Blue, and made from our cool, crisp Percale cotton weave with hidden zipper.",
+        "quantityAvailable": "4"
+      },
+      {
+        "brand": "Silken Slumber",
+        "name": "Solid and Printed Silk Pillowcase Giftable Collection",
+        "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61aiVDAVGmL._SX425_.jpg",
+        "price": "79",
+        "description": "Styled in luxurious silk which helps minimize wrinkles, prevent bedhead and reduce sleep creases. The sumptuous silk pillowcase lends next-level style and comfort to your sleep experience.",
+        "quantityAvailable": "2"
+      },
+      {
+        "brand": "Hadley",
+        "name": "USB Outlet Nightstand",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/5/optimized/10166875_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "269",
+        "description": "Bring about a modern meets classic styling revolution in your bedroom space in a most functional way with the framed drawer paneling, crisp white oak veneers, sculptural legs and dual USB ports of this royally elegant nightstand.",
+        "quantityAvailable": "2"
+      },
+      {
+        "brand": "Adesso",
+        "name": "Linda Table Lamp",
+        "imageUrl": "https://slimages.macysassets.com/is/image/MCY/products/4/optimized/8534414_fpx.tif?op_sharpen=1&wid=1230&hei=1500&fit=fit,1&$filterxlrg$",
+        "price": "119",
+        "description": "A modern refinement characterizes the Linda Table Lamp from Adesso. Its sleek tapered base with a brushed-steel finish is topped by an oversized textured fabric shade.",
+        "quantityAvailable": "2"
+      }
+    ]
+
+  }
+}

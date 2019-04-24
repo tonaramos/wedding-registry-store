@@ -1,31 +1,40 @@
 <template>
-    <Page>
-        <ActionBar title="D & A Wedding registry!" android:flat="true"/>
-        <TabView android:tabBackgroundColor="#53ba82"
-                 android:tabTextColor="#c4ffdf"
-                 android:selectedTabTextColor="#ffffff"
-                 androidSelectedTabHighlightColor="#ffffff">
-            <TabViewItem title="B remainding" :text="'$' +amount">
-                <GridLayout columns="*" rows="*">
-                    <Label class="Budget Remaindnig" :text="'$' +amount" col="0" row="0"/>
-                </GridLayout>
-            </TabViewItem>
-            <TabViewItem title="BUY">
-                <GridLayout columns="*" rows="*">
-                    <Label class="message" text="Tab 2 Content" col="0" row="0"/>
-                </GridLayout>
-            </TabViewItem>
-        </TabView>
-    </Page>
+  <Page>
+     <StackLayout>
+       <Label textWrap="true" :text="msg" class="message" />
+        <Button text="To Login Page" @tap="$navigateTo(loginPage)" />
+      </StackLayout>
+      <!-- <Label textWrap="true" text="Play wit NativeScript!" class="h2 description-label" /> -->
+      
+      <!-- <Login ref="Login"/>
+      <Cart ref="Cart"/> -->
+  </Page>
 </template>
 
 <script >
+import Login from "./Login";
+
   export default {
+    methods: {
+     
+    },
     data() {
       return {
+        loginPage: Login,
+
         msg: 'Welcome',
-        amount: 1000
+        amount: 1000,
+        loggedIn: false
       }
+    },
+    components: {
+      Login, 
+    },
+    computed: {
+      title() {
+        console.log(this.$store.getters.getRegistryName);
+        return this.$store.getters.getRegistryName;
+      } 
     }
   }
 </script>

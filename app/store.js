@@ -29,5 +29,6 @@ export default new Vuex.Store({
   getters: {      // can access the store     you can have functions in the getters
     getName: state => state.registryName,
     getShortName: state => state.registryShortName,
+    getItemList: state => state.itemList,
   }
 });

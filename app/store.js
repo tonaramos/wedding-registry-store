@@ -5,19 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    loadingStatus: false,
-    toDos: [],
-    registryName: '',
+    registryName: 'THISISATEMPNAME',
     registryShortName: '',
     itemList: [],
   },
   mutations: {          // use to commit and track state changes  // mutations update the state directly
-    SET_LOADING_STATUS(state, status) {
-      state.loadingStatus = status;
-    },
-    SET_TOOLS(state, toDos) {
-      state.toDos = toDos;
-    },
+
     SET_REGISTRYNAME(state, name, shortName) {
       state.registryName = name;
       state.registryShortName = shortName;
@@ -27,16 +20,13 @@ export default new Vuex.Store({
     },
   },
   actions: {      //can update the state    // best practice for actions to call mutations 
-      fetchData(context) {
-        context.commit('SET_LOADING_STATUS', true);
-        const registryData = JSON.parse(data);
-
-        context.commit('SET_LOADING_STATUS', false);
-        context.commit('SET_REGISTRYNAME', registryData.data.name, registryData.data.shortName);
-        context.commit('SET_ITEMLIST', registryData.data.items);
+                  // use actions for any unsynchronous operations. 
+      fetchData(context) {  // context is passed automatically an has the commit method
+        context.commit('SET_REGISTRYNAME', data.name, data.shortName);
+        context.commit('SET_ITEMLIST', data.items);
     }
   },
-  getters: {      // can access the store
+  getters: {      // can access the store     you can have functions in the getters
     getName: state => state.registryName,
     getShortName: state => state.registryShortName,
   }

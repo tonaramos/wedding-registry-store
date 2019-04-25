@@ -2,7 +2,7 @@
   <page>
     <FlexboxLayout class="page" flexDirection="column" backgroundColor="#ffff">
       <stackLayout class="form">
-        <Label class="header" text="REGISTRY-NAME"/>
+        <Label class="header" :text="registryName"/>
         <GridLayout rows="auto, auto, auto">
           <StackLayout row="0" class="input-field">
             <TextField 
@@ -60,12 +60,12 @@ import ItemList from "./ItemList";
         this.$refs.email.nativeView.focus();
       },
       submit() {
+        // Check if input fields are correct
         console.log('SUBMIT BUTTON PRESSED', this.user.name)
       }
     },
     data() {
       return {
-        processing: false,
         itemListPage: ItemList,
         loggedIn: true,
         user: {
@@ -78,6 +78,11 @@ import ItemList from "./ItemList";
     name: "Login",
     components: {
       ItemList,
+    },
+    computed: {
+      registryName() {
+        return this.$store.state.registryName;
+      }
     }
   };
 </script>

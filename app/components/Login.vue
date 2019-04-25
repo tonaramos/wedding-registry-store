@@ -38,8 +38,7 @@
             </TextField>
           </StackLayout>
         </GridLayout>
-        <Button text='Log In' @tap="submit" class="btn-primary">
-        </Button>
+        <Button text='Log In' @tap="submit" class="btn-primary" />
         <Label *v-show="loggedIn" text="skip"
             class="login-label" @tap="$navigateTo(itemListPage)">
         </Label>

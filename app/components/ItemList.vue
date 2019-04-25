@@ -4,8 +4,8 @@
       <Label textWrap="true" text="At Item List!" class="message" />
       <Button text="To Cart Page" @tap="$navigateTo(cartPage)" />
       <ListView for="item in items" >
-        <v-template>
-          <StoreItem :itemData="item" />
+        <v-template class="itemTemplate">
+          <StoreItem :itemData="item" class="storeItem"/>
         </v-template>
       </ListView>
     </FlexboxLayout>
@@ -37,9 +37,16 @@ import StoreItem from "./StoreItem";
 </script>
 
 ]<style scoped>
+  .itemTemplate {
+    width: 100%;
+  }
+  .storeItem {
+    max-height: 800;
+    max-width: 100%;
+  }
   .frame {
    align-items: center;
-   vertical-align: center;
+   vertical-align: top;
   }
   .message {
       vertical-align: center;

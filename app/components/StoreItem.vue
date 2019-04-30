@@ -13,25 +13,27 @@
     </flexboxLayout>
     <Label textWrap="true" :text="$props.itemData.description" class="itemDescription" />
     <flexboxLayout class="btnFrame">
-      <Button text='ADD TO CART' @tap="addToCart" :class="status.itemAvailable && status.budgetAvailable ? 'btnActive' : 'btnDisabled'" :isEnabled="status.itemAvailable && status.budgetAvailable"/>
+      <Button text='ADD TO CART' @tap="addToCart" :class="status.itemAvailable && status.budgetAvailable ? 'btnActive' : 'btnDisabled'"/>
     </flexboxLayout>
   </flexboxLayout>
 </template>
 
 <script >
+  import { mapGetters } from 'vuex';
+
   export default {
     created() {
       this.updateAvailableQuantity();
       this.setItemAvailable();
-      this.updateBudgetAvailable();
+      this.setBudgetAvailable();
+      // console.log('--------', this.$props.budget.budgetRemainder );
     },
     mounted() {
-      
     },
-    props: ['itemData'],
+    props: ["itemData", "budget"],
     methods: {
       updateAvailableQuantity() {
-        const allitemsQuantityList = this.$store.getters.getItemsQuantity;
+        const allitemsQuantityList = this.getItemsQuantity;
         const currItemQuantity = 0;
         for (let item in allitemsQuantityList) {
           if (allitemsQuantityList[item].id === this.$props.itemData.id) {
@@ -44,22 +46,28 @@
         this.$set(this.status, 'itemAvailable', this.status.itemQuantity > 0 ? true : false);
       },
       updateBudgetAvailable() {
-        const budgetAvailable = this.$store.getters.getBudgetRemainder >= this.$props.itemData.price;
-        console.log('the BUDGET from getters ==++++++++++++++============>', this.$store.getters.getBudgetRemainder);
-        console.log('item available? ==++++++++++++++============>', this.status.budgetAvailable);
-        console.log('the BUDGET LEFT ==++++++++++++++============>', budgetAvailable);
-        this.$set(this.status, 'budgetAvailable', budgetAvailable);
+        this.$emit('updateBudgetInItemList', );
+        // console.log('thepassed budget emmiter ==++++++++++++++============>');
+        this.setBudgetAvailable();
+      },
+      setBudgetAvailable() {
+        this.$set(this.status, 'budgetAvailable', this.$props.budget.budgetRemainder >= this.$props.itemData.price);
       },
       addToCart() {
-        
-        this.$store.dispatch('addItemToShoppingCart', this.$props.itemData);
+        if (this.status.itemAvailable && this.status.budgetAvailable ) {
+            this.$store.dispatch('addItemToShoppingCart', this.$props.itemData);
+            this.updateAvailableQuantity();
+            this.setItemAvailable();
+            this.updateBudgetAvailable();
         //add the price to the total price in store
         //subtract/update the item from the item list in store
         //add the item to the shopping cart
         //update the data (itemQuantity and ItemAvailable) of the item component
         // this.$store.dispatch('decreaseItem', this.$props.itemData.id);
-        console.log('add to cart button pressed!');
-        console.log('did my state update???????? ', this.$store.getters.getShoppingCart.length );
+        // console.log('add to cart button pressed!');
+        // console.log('did my state update???????? ', this.getShoppingCart.length );
+        }
+        
       }
     },
     data() {
@@ -68,12 +76,26 @@
           itemQuantity: 0,
           itemAvailable: false,
           budgetAvailable: false,
+          currentBudget: this.$props.budget.budgetRemainder,
         }
       }
     },
     name: "StoreItem",
     computed: {
+      ...mapGetters([
+      'getItemsQuantity',
+      'getBudgetRemainder',
+      'getShoppingCart',
+      ])
+    },
+    watch: {
+      getBudgetRemainder(newBudget, oldBudget) {
+        // console.log('========================== FROM WATCH __ NEW BUDGET => ',newBudget);
+        this.$set(this.status, 'currentBudget', newBudget);
+        this.setBudgetAvailable();
+      }
     }
+
   };
 </script>
 
@@ -149,8 +171,9 @@
   }
   .btnDisabled {
     background-color: #dbdbdb;
+    color:white;
     width: 75%;
     border-radius: 100%;
-    color:white;
+    font-size: 16px; 
   }
 </style>

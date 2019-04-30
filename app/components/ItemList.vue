@@ -2,20 +2,20 @@
   <page>
     <FlexboxLayout class="frame">
       <FlexboxLayout class="infoBar">
-        <Label textWrap="true" text="A and D" class="message" />
+        <Label textWrap="true" :text="getShortName" class="message" />
         <Button text="Cart" @tap="goTo('Cart')" />
       </FlexboxLayout>
       <ScrollView class="scrollViewFrame">
         <StackLayout>
-          <StoreItem :itemData="status.items[0]" class="storeItem"/>
-          <StoreItem :itemData="status.items[1]" class="storeItem"/>
-          <StoreItem :itemData="status.items[2]" class="storeItem"/>
-          <StoreItem :itemData="status.items[3]" class="storeItem"/>
-          <StoreItem :itemData="status.items[4]" class="storeItem"/>
-          <StoreItem :itemData="status.items[5]" class="storeItem"/>
-          <StoreItem :itemData="status.items[6]" class="storeItem"/>
-          <StoreItem :itemData="status.items[7]" class="storeItem"/>
-          <StoreItem :itemData="status.items[8]" class="storeItem"/>
+          <StoreItem :itemData="status.items[0]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[1]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[2]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[3]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[4]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[5]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[6]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[7]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
+          <StoreItem :itemData="status.items[8]" :budget="status" class="storeItem" v-on:updateBudgetInItemList="setBudgetRemainder" />
         </StackLayout>
       </ScrollView>
       <FlexboxLayout class="infoBar">
@@ -28,6 +28,7 @@
 <script >
 import routes from "../routes/index";
 import StoreItem from "./StoreItem";
+import { mapGetters } from 'vuex';
 
   export default {
     created() {
@@ -39,10 +40,13 @@ import StoreItem from "./StoreItem";
         this.$navigateTo(routes[name], { clearHistory: true });
       },
       setItems() {
-        this.$set(this.status, 'items', this.$store.getters.getItemList);
+        this.$set(this.status, 'items', this.getItemList);
       },
       setBudgetRemainder() {
-        this.$set(this.status, 'budgetRemainder', this.$store.getters.getBudgetRemainder);
+        // update state with minus 
+        // console.log('store Budget remainder--=-=-=-=-=-=-==-=-=-> ', this.getBudgetRemainder);
+        this.$set(this.status, 'budgetRemainder', this.getBudgetRemainder);
+        // console.log('data Budget remainder--=-=-=-=-=-=-==-=-=-> ', this.status.budgetRemainder);
       },
     },
     data() {
@@ -58,6 +62,11 @@ import StoreItem from "./StoreItem";
       StoreItem,
     },
     computed: {
+      ...mapGetters([
+        'getItemList',
+        'getBudgetRemainder',
+        'getShortName',
+      ]),
     }
   };
 </script>

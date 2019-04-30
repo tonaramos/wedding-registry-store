@@ -111,11 +111,11 @@ import ItemList from "./ItemList";
   }
 
   .input-field {
-      margin-bottom: 25;
+      margin-bottom: 25px;
   }
 
   .input {
-    font-size: 18;
+    font-size: 18px;
     placeholder-color: #A8A8A8;
   }
 
@@ -132,11 +132,11 @@ import ItemList from "./ItemList";
   .login-label {
       horizontal-align: center;
       color: #A8A8A8;
-      font-size: 16;
+      font-size: 16px;
   }
 
   .sign-up-label {
-      margin-bottom: 20;
+      margin-bottom: 20px;
   }
 
 </style>

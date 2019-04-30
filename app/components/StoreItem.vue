@@ -1,19 +1,19 @@
 <template>
   <flexboxLayout class="itemFrame">
-    <Image src="~/assets/images/cabinetIconImage.jpg" stretch="aspectFit" class="imageFrame" />
-    <flexboxLayout class="itemSpecsFrame">
-      
-      <StackLayout>
-        
-        <Label textWrap="true" :text="$props.itemData.brand" class="itemBrand" />
+    <flexboxLayout class="itemSpecsFrame">  
+      <Image src="~/assets/images/cabinetIconImage.jpg" stretch="aspectFit" class="imageFrame" />
+      <StackLayout class="itemInfoStack">
+        <Label textWrap="true" :text="$props.itemData.brand + '          ID:' + $props.itemData.id" class="itemBrand" />
         <Label textWrap="true" :text="$props.itemData.name" class="itemName" />
-        <Label textWrap="true" :text="$props.itemData.description" class="itemDescription" />
         <flexboxLayout class="itemPriceFrame">
           <Label textWrap="true" :text="'$' + $props.itemData.price + '   '" class="itemPrice" />
-          <Label textWrap="true" :text=" $props.itemData.id + ' Items available: ' +$props.itemData.quantityAvailable" class="itemAvail" />
+          <Label textWrap="true" :text="'Available: ' +$props.itemData.quantityAvailable" class="itemAvail" />
         </flexboxLayout>
       </StackLayout>
-      <Button text='ADD TO CART' @tap="buy" class="btn" :isEnabled="itemAvailable"/>
+    </flexboxLayout>
+    <Label textWrap="true" :text="$props.itemData.description" class="itemDescription" />
+    <flexboxLayout class="btnFrame">
+      <Button text='ADD TO CART' @tap="buy" :class="itemAvailable ? 'btnActive' : 'btnDisabled'" :isEnabled="itemAvailable"/>
     </flexboxLayout>
   </flexboxLayout>
 </template>
@@ -23,7 +23,6 @@
      beforeMount() {
     },
     props: ['itemData'],
-  
     methods: {
       buy() {
         this.$store.dispatch('decreaseItem', this.$props.itemData.id);
@@ -32,7 +31,7 @@
     },
     data() {
       return {
-        itemAvailable: false
+        itemAvailable: true,
       }
     },
     name: "StoreItem",
@@ -46,43 +45,78 @@
 
 <style scoped>
   .itemFrame {
-    background-color: #f7e0a3;
+    flex-direction: column;
+    max-width: auto;
+    margin: 10;
+    border: 10px black solid;
   }
 
   .itemSpecsFrame {
-   flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-basis: content;
+    max-width: 100%;
+  }
+  .itemInfoStack {
+    margin-left: 15px;
+    width: 70%;
   }
 
   .imageFrame {
-    height: 200;
-    width: 200;
+    flex-basis: content;
+    width: 30%;
+    margin: 15px;
   }
   .itemBrand {
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
 
-    text-transform: capitalize;
+  .itemName {
+    font: 22;
     font-weight: bold;
+    text-align: justify;
+    margin-bottom: 15px;
   }
-  /* .itemName {
-  } */
-  .itemDescriptionv { 
+
+  .itemDescription { 
     font-size: 14;
+    text-align: justify;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
   }
-  .itemBrand {
-    text-transform: capitalize;
-  }
+
   .itemPriceFrame {
+    margin-bottom: 15px;
+    font: 16;
+    justify-content: space-around;
   }
   .itemPrice {
     text-transform: capitalize;
   }
+  
   .itemAvail {
     text-transform: capitalize;
   }
 
-  .btn {
-    background-color: #4c8492;
-    max-width: 50;
-    height: 25;
+  .btnFrame {
+    justify-content: center;
+    margin-bottom: 15px;
   }
 
+  .btnActive {
+    background-color: #75c8dd;
+    color: white;
+    width: 75%;
+    border-radius: 100%;
+    font-size: 16px; 
+  }
+  .btnDisabled {
+    background-color: #dbdbdb;
+    width: 75%;
+    border-radius: 100%;
+    color:white;
+  }
 </style>

@@ -1,13 +1,22 @@
 <template>
   <page>
-    <FlexboxLayout flexDirection="column" backgroundColor="#ffff" class="frame">
+    <FlexboxLayout class="frame">
       <Label textWrap="true" text="At Item List!" class="message" />
       <Button text="To Cart Page" @tap="$navigateTo(cartPage)" />
-      <ListView for="item in items" >
-        <v-template class="itemTemplate">
-          <StoreItem :itemData="item" class="storeItem"/>
-        </v-template>
-      </ListView>
+      <ScrollView class="scrollViewFrame">
+        <StackLayout>
+          <StoreItem :itemData="items[0]" class="storeItem"/>
+          <StoreItem :itemData="items[1]" class="storeItem"/>
+          <StoreItem :itemData="items[2]" class="storeItem"/>
+          <StoreItem :itemData="items[3]" class="storeItem"/>
+          <StoreItem :itemData="items[4]" class="storeItem"/>
+          <StoreItem :itemData="items[5]" class="storeItem"/>
+          <StoreItem :itemData="items[6]" class="storeItem"/>
+          <StoreItem :itemData="items[7]" class="storeItem"/>
+          <StoreItem :itemData="items[8]" class="storeItem"/>
+        </StackLayout>
+      </ScrollView>
+      <Label textWrap="true" text="Bottom of List" class="message" />
     </FlexboxLayout>
   </page>
 </template>
@@ -37,21 +46,30 @@ import StoreItem from "./StoreItem";
 </script>
 
 ]<style scoped>
-  .itemTemplate {
-    width: 100%;
-  }
-  .storeItem {
-    max-height: 800;
-    max-width: 100%;
-  }
   .frame {
-   align-items: center;
-   vertical-align: top;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    background-color: #fcf9f7;
   }
   .message {
-      vertical-align: center;
-      text-align: center;
-      font-size: 20;
-      color: red;
+    vertical-align: center;
+    text-align: center;
+    font-size: 20px;
+    color: red;
   }
+  .scrollViewFrame {
+    background-color: whitesmoke;
+    height: 85%;
+  }
+
+  .storeItem {
+    width: auto;
+    background-color: #f8feff;
+    border-bottom-width: 3px;
+    border-bottom-color: rgb(220, 220, 220);
+  }
+
 </style>

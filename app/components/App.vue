@@ -9,10 +9,8 @@
 
 <script >
 import Login from "./Login";
-
 //////  USe clear history to not have a back buton!!!!
 ////using HMR does not reload the entire app!!
-
 
   export default {
     beforeMount() {

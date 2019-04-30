@@ -40,7 +40,7 @@
         </GridLayout>
         <Button text='Log In' @tap="submit" class="btn-primary" />
         <Label *v-show="loggedIn" text="skip"
-            class="login-label" @tap="$navigateTo(itemListPage)">
+            class="login-label" @tap="goTo('ItemList')">
         </Label>
       </StackLayout>
     </FlexboxLayout>
@@ -48,10 +48,13 @@
 </template>
 
 <script >
-import ItemList from "./ItemList";
+import routes from "../routes/index";
 
   export default {
     methods: {
+      goTo(name) {
+        this.$navigateTo(routes[name], { clearHistory: true });
+      },
       focusPassword() {
         this.$refs.password.nativeView.focus();
       },
@@ -65,7 +68,6 @@ import ItemList from "./ItemList";
     },
     data() {
       return {
-        itemListPage: ItemList,
         loggedIn: true,
         user: {
           name: '',
@@ -76,7 +78,7 @@ import ItemList from "./ItemList";
     },
     name: "Login",
     components: {
-      ItemList,
+      // ItemList,
     },
     computed: {
       registryName() {

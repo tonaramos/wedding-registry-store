@@ -1,29 +1,34 @@
 <template>
   <Page>
-     <StackLayout>
-       <Label textWrap="true" :text="name" class="message" />
-        <Button text="To Login Page" @tap="$navigateTo(loginPage)" />
-      </StackLayout>
+    <GridLayout class="app" rows="*, auto">
+      <ContentView row="0">
+        <Frame>
+          <Login />
+        </Frame>
+      </ContentView>
+    </GridLayout>
   </Page>
 </template>
 
 <script >
 import Login from "./Login";
-//////  USe clear history to not have a back buton!!!!
-////using HMR does not reload the entire app!!
+import routes from '../routes/index'
 
   export default {
     beforeMount() {
       this.$store.dispatch('fetchData');
     },
     methods: {
-    
+      goTo(name) {
+        this.$navigateTo(Login, { clearHistory: true });
+      },
     },
     data() {
       return {
         loginPage: Login,
       }
     },
+    name: "App",
     components: {
       Login, 
     },
@@ -36,6 +41,9 @@ import Login from "./Login";
 </script>
 
 <style scoped>
+  .app {
+    background-color: green;
+  }
     .message {
         vertical-align: center;
         text-align: center;

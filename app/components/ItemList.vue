@@ -1,8 +1,10 @@
 <template>
   <page>
     <FlexboxLayout class="frame">
-      <Label textWrap="true" text="At Item List!" class="message" />
-      <Button text="To Cart Page" @tap="$navigateTo(cartPage)" />
+      <FlexboxLayout class="infoBar">
+        <Label textWrap="true" text="A and D" class="message" />
+        <Button text="Cart" @tap="goTo('Cart')" />
+      </FlexboxLayout>
       <ScrollView class="scrollViewFrame">
         <StackLayout>
           <StoreItem :itemData="items[0]" class="storeItem"/>
@@ -16,26 +18,30 @@
           <StoreItem :itemData="items[8]" class="storeItem"/>
         </StackLayout>
       </ScrollView>
-      <Label textWrap="true" text="Bottom of List" class="message" />
+      <FlexboxLayout class="infoBar">
+        <Label textWrap="true" text="Remaining: " class="message" />
+      </FlexboxLayout>
     </FlexboxLayout>
   </page>
 </template>
 
 <script >
-import Cart from "./Cart";
+import routes from "../routes/index";
 import StoreItem from "./StoreItem";
 
   export default {
     methods: {
+      goTo(name) {
+        this.$navigateTo(routes[name], { clearHistory: true });
+      },
     },
     data() {
       return {
-        cartPage: Cart,
       }
     },
     name: "Login",
     components: {
-      Cart, StoreItem,
+      StoreItem,
     },
     computed: {
       items() {
@@ -62,7 +68,7 @@ import StoreItem from "./StoreItem";
   }
   .scrollViewFrame {
     background-color: whitesmoke;
-    height: 85%;
+    height: 86%;
   }
 
   .storeItem {
@@ -70,6 +76,12 @@ import StoreItem from "./StoreItem";
     background-color: #f8feff;
     border-bottom-width: 3px;
     border-bottom-color: rgb(220, 220, 220);
+  }
+  .infoBar {
+    width: 100%;
+    height: 7%;
+    justify-content: space-between;
+    background-color: darkgoldenrod;
   }
 
 </style>

@@ -76,13 +76,13 @@
   .itemName {
     font: 22;
     font-weight: bold;
-    text-align: justify;
+    /* text-align: justify; */
     margin-bottom: 15px;
   }
 
   .itemDescription { 
     font-size: 14;
-    text-align: justify;
+    /* text-align: justify; */
     margin-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;

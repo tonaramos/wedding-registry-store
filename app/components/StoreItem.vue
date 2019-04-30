@@ -13,7 +13,7 @@
     </flexboxLayout>
     <Label textWrap="true" :text="$props.itemData.description" class="itemDescription" />
     <flexboxLayout class="btnFrame">
-      <Button text='ADD TO CART' @tap="addToCart" :class="status.itemAvailable ? 'btnActive' : 'btnDisabled'" :isEnabled="status.itemAvailable"/>
+      <Button text='ADD TO CART' @tap="addToCart" :class="status.itemAvailable && status.budgetAvailable ? 'btnActive' : 'btnDisabled'" :isEnabled="status.itemAvailable && status.budgetAvailable"/>
     </flexboxLayout>
   </flexboxLayout>
 </template>
@@ -23,6 +23,10 @@
     created() {
       this.updateAvailableQuantity();
       this.setItemAvailable();
+      this.updateBudgetAvailable();
+    },
+    mounted() {
+      
     },
     props: ['itemData'],
     methods: {
@@ -39,13 +43,23 @@
       setItemAvailable() {
         this.$set(this.status, 'itemAvailable', this.status.itemQuantity > 0 ? true : false);
       },
+      updateBudgetAvailable() {
+        const budgetAvailable = this.$store.getters.getBudgetRemainder >= this.$props.itemData.price;
+        console.log('the BUDGET from getters ==++++++++++++++============>', this.$store.getters.getBudgetRemainder);
+        console.log('item available? ==++++++++++++++============>', this.status.budgetAvailable);
+        console.log('the BUDGET LEFT ==++++++++++++++============>', budgetAvailable);
+        this.$set(this.status, 'budgetAvailable', budgetAvailable);
+      },
       addToCart() {
+        
+        this.$store.dispatch('addItemToShoppingCart', this.$props.itemData);
         //add the price to the total price in store
         //subtract/update the item from the item list in store
         //add the item to the shopping cart
         //update the data (itemQuantity and ItemAvailable) of the item component
         // this.$store.dispatch('decreaseItem', this.$props.itemData.id);
         console.log('add to cart button pressed!');
+        console.log('did my state update???????? ', this.$store.getters.getShoppingCart.length );
       }
     },
     data() {
@@ -53,6 +67,7 @@
         status: {
           itemQuantity: 0,
           itemAvailable: false,
+          budgetAvailable: false,
         }
       }
     },

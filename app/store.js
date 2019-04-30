@@ -31,6 +31,31 @@ export default new Vuex.Store({
         }
       });
       state.itemList = newList;
+    },
+    UPDATE_SHOPPING_CART(state, itemAdded) {
+      console.log('store item added ==++++++++++++++============>', itemAdded.name);
+      // console.log('store shopping list Prev==++++++++++++++============>', state.shoppingCart);
+      let newEntry = null;
+      let newShoppingCart = state.shoppingCart.filter(item => {
+        if (item.id === itemAdded.id) {
+          newEntry = item;
+          return false;
+        } else {
+          return true;
+        }
+      });
+      if (newEntry === null) {
+        newShoppingCart.push({...itemAdded, numberBuying: 1 })
+      } else {
+        newEntry.numberBuying = newEntry.numberBuying += 1;
+        newShoppingCart.push(newEntry);
+      }
+      state.shoppingCart = newShoppingCart;
+      // add to price 
+      state.totalPrice = state.totalPrice + parseInt(itemAdded.price);
+      console.log('-------the new shopping car length -------> ', newShoppingCart.length);
+      console.log('-------the new shopping price -------> ', state.totalPrice);
+
     }
   },
   actions: {      //can update the state    // best practice for actions to call mutations 
@@ -39,12 +64,16 @@ export default new Vuex.Store({
       context.commit('SET_REGISTRYNAME', data.name, data.shortName);
       context.commit('SET_ITEMLIST', data.items);
     },
-    decreaseItem(context, id) {
-      context.commit('UPDATE_ITEMAVAIL', {id, quantity: -1 });
-    },
-    increaseItem(context, id) {
-      context.commit('UPDATE_ITEMAVAIL', {id, quantity: +1 });
+    addItemToShoppingCart(context, item) {
+      context.commit('UPDATE_SHOPPING_CART', item);
     }
+
+    // decreaseItem(context, id) {
+    //   context.commit('UPDATE_ITEMAVAIL', {id, quantity: -1 });
+    // },
+    // increaseItem(context, id) {
+    //   context.commit('UPDATE_ITEMAVAIL', {id, quantity: +1 });
+    // }
 
   },
   getters: {      // can access the store     you can have functions in the getters
@@ -58,6 +87,7 @@ export default new Vuex.Store({
         id: item.id,
         quantityAvailable: item.quantityAvailable
       }
-    })
+    }),
+    getShoppingCart: state => state.shoppingCart,
   }
 });

@@ -15,7 +15,7 @@ import Login from "./Login";
 import routes from '../routes/index'
 
   export default {
-    beforeMount() {
+    created() {
       this.$store.dispatch('fetchData');
     },
     methods: {
@@ -31,11 +31,6 @@ import routes from '../routes/index'
     name: "App",
     components: {
       Login, 
-    },
-    computed: {
-      name() {
-        return this.$store.state.registryName;
-      },
     }
   }
 </script>

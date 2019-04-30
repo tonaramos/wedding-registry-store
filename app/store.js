@@ -5,13 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    registryName: 'THISISATEMPNAME',
+    registryName: '',
     registryShortName: '',
     itemList: [],
-    shoppingCart: []
+    shoppingCart: [],
+    budget: 1000,
+    totalPrice: 0,
   },
   mutations: {          // use to commit and track state changes  // mutations update the state directly
-
     SET_REGISTRYNAME(state, name, shortName) {
       state.registryName = name;
       state.registryShortName = shortName;
@@ -50,5 +51,13 @@ export default new Vuex.Store({
     getName: state => state.registryName,
     getShortName: state => state.registryShortName,
     getItemList: state => state.itemList,
+    getBudgetRemainder: state => state.budget - state.totalPrice,
+    // From StoreItem
+    getItemsQuantity: state => state.itemList.map(item => {
+      return {
+        id: item.id,
+        quantityAvailable: item.quantityAvailable
+      }
+    })
   }
 });

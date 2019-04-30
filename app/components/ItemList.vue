@@ -7,19 +7,19 @@
       </FlexboxLayout>
       <ScrollView class="scrollViewFrame">
         <StackLayout>
-          <StoreItem :itemData="items[0]" class="storeItem"/>
-          <StoreItem :itemData="items[1]" class="storeItem"/>
-          <StoreItem :itemData="items[2]" class="storeItem"/>
-          <StoreItem :itemData="items[3]" class="storeItem"/>
-          <StoreItem :itemData="items[4]" class="storeItem"/>
-          <StoreItem :itemData="items[5]" class="storeItem"/>
-          <StoreItem :itemData="items[6]" class="storeItem"/>
-          <StoreItem :itemData="items[7]" class="storeItem"/>
-          <StoreItem :itemData="items[8]" class="storeItem"/>
+          <StoreItem :itemData="status.items[0]" class="storeItem"/>
+          <StoreItem :itemData="status.items[1]" class="storeItem"/>
+          <StoreItem :itemData="status.items[2]" class="storeItem"/>
+          <StoreItem :itemData="status.items[3]" class="storeItem"/>
+          <StoreItem :itemData="status.items[4]" class="storeItem"/>
+          <StoreItem :itemData="status.items[5]" class="storeItem"/>
+          <StoreItem :itemData="status.items[6]" class="storeItem"/>
+          <StoreItem :itemData="status.items[7]" class="storeItem"/>
+          <StoreItem :itemData="status.items[8]" class="storeItem"/>
         </StackLayout>
       </ScrollView>
       <FlexboxLayout class="infoBar">
-        <Label textWrap="true" text="Remaining: " class="message" />
+        <Label textWrap="true" :text="'Remaining: $' + status.budgetRemainder" class="message" />
       </FlexboxLayout>
     </FlexboxLayout>
   </page>
@@ -30,13 +30,27 @@ import routes from "../routes/index";
 import StoreItem from "./StoreItem";
 
   export default {
+    created() {
+      this.setItems();
+      this.setBudgetRemainder();
+    },
     methods: {
       goTo(name) {
         this.$navigateTo(routes[name], { clearHistory: true });
       },
+      setItems() {
+        this.$set(this.status, 'items', this.$store.getters.getItemList);
+      },
+      setBudgetRemainder() {
+        this.$set(this.status, 'budgetRemainder', this.$store.getters.getBudgetRemainder);
+      },
     },
     data() {
       return {
+        status: {
+          budgetRemainder: 0,
+          items: [],
+        }
       }
     },
     name: "Login",
@@ -44,9 +58,6 @@ import StoreItem from "./StoreItem";
       StoreItem,
     },
     computed: {
-      items() {
-        return this.$store.state.itemList;
-      }
     }
   };
 </script>

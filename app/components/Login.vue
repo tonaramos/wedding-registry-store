@@ -78,7 +78,6 @@ import routes from "../routes/index";
     },
     name: "Login",
     components: {
-      // ItemList,
     },
     computed: {
       registryName() {

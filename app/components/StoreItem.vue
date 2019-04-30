@@ -6,39 +6,58 @@
         <Label textWrap="true" :text="$props.itemData.brand + '          ID:' + $props.itemData.id" class="itemBrand" />
         <Label textWrap="true" :text="$props.itemData.name" class="itemName" />
         <flexboxLayout class="itemPriceFrame">
-          <Label textWrap="true" :text="'$' + $props.itemData.price + '   '" class="itemPrice" />
-          <Label textWrap="true" :text="'Available: ' +$props.itemData.quantityAvailable" class="itemAvail" />
+          <Label textWrap="true" :text="'$' + $props.itemData.price" class="itemPrice" />
+          <Label textWrap="true" :text="'Available: ' + status.itemQuantity" class="itemAvail" />
         </flexboxLayout>
       </StackLayout>
     </flexboxLayout>
     <Label textWrap="true" :text="$props.itemData.description" class="itemDescription" />
     <flexboxLayout class="btnFrame">
-      <Button text='ADD TO CART' @tap="buy" :class="itemAvailable ? 'btnActive' : 'btnDisabled'" :isEnabled="itemAvailable"/>
+      <Button text='ADD TO CART' @tap="addToCart" :class="status.itemAvailable ? 'btnActive' : 'btnDisabled'" :isEnabled="status.itemAvailable"/>
     </flexboxLayout>
   </flexboxLayout>
 </template>
 
 <script >
   export default {
-     beforeMount() {
+    created() {
+      this.updateAvailableQuantity();
+      this.setItemAvailable();
     },
     props: ['itemData'],
     methods: {
-      buy() {
-        this.$store.dispatch('decreaseItem', this.$props.itemData.id);
+      updateAvailableQuantity() {
+        const allitemsQuantityList = this.$store.getters.getItemsQuantity;
+        const currItemQuantity = 0;
+        for (let item in allitemsQuantityList) {
+          if (allitemsQuantityList[item].id === this.$props.itemData.id) {
+            this.$set(this.status, 'itemQuantity', allitemsQuantityList[item].quantityAvailable)
+            break;
+          }
+        } 
+      },
+      setItemAvailable() {
+        this.$set(this.status, 'itemAvailable', this.status.itemQuantity > 0 ? true : false);
+      },
+      addToCart() {
+        //add the price to the total price in store
+        //subtract/update the item from the item list in store
+        //add the item to the shopping cart
+        //update the data (itemQuantity and ItemAvailable) of the item component
+        // this.$store.dispatch('decreaseItem', this.$props.itemData.id);
         console.log('add to cart button pressed!');
       }
     },
     data() {
       return {
-        itemAvailable: true,
+        status: {
+          itemQuantity: 0,
+          itemAvailable: false,
+        }
       }
     },
     name: "StoreItem",
     computed: {
-      getQuantity() {
-        return this.$store.getters.itemQuantity;
-      }
     }
   };
 </script>

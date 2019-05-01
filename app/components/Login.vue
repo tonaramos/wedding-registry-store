@@ -41,8 +41,7 @@
         </GridLayout>
         <Label text="Please enter a valid Email" :class=" !user.validEmail && user.validationAttempted ? 'alertVisible' : 'alertNotVisible'" />
         <Button text='Log In' @tap="logInHandler" class="btn-primary" />
-        <Label *v-show="loggedIn" text="skip"
-            class="login-label" @tap="goTo('ItemList')">
+        <Label text="skip" class="login-label" @tap="goTo('ItemList')">
         </Label>
       </StackLayout>
     </FlexboxLayout>
@@ -122,7 +121,6 @@ import routes from "../routes/index";
     font-weight: 600;
     margin-top: 35;
     text-align: center;
-    /* color: #f09c67; */
     color: #da7434;
   }
   .registryTitle {
@@ -130,11 +128,10 @@ import routes from "../routes/index";
     horizontal-align: center;
     font-size: 18;
     font-weight: 400;
-    /* color: #b15b25; */
     margin-bottom: 30;
   }
   .input-field {
-      margin-bottom: 25px;
+    margin-bottom: 25px;
   }
   .input {
     font-size: 18px;
@@ -154,7 +151,7 @@ import routes from "../routes/index";
     font-size: 16px;
   }
   .sign-up-label {
-      margin-bottom: 20px;
+    margin-bottom: 20px;
   }
   .alertVisible {
     font-size: 16;
@@ -168,5 +165,4 @@ import routes from "../routes/index";
     horizontal-align: center;
     text-align: center;
   }
-
 </style>

@@ -56,10 +56,10 @@
       },
       addToCart() {
         if (this.status.itemAvailable && this.status.budgetAvailable ) {
-            this.$store.dispatch('addItemToShoppingCart', this.$props.itemData);
-            this.$set(this.status, 'itemQuantity', this.status.itemQuantity - 1);
-            this.setItemAvailable();
-            this.updateBudgetAvailable();
+          this.$store.dispatch('addItemToShoppingCart', this.$props.itemData);
+          this.$set(this.status, 'itemQuantity', this.status.itemQuantity - 1);
+          this.setItemAvailable();
+          this.updateBudgetAvailable();
         }
         
       }

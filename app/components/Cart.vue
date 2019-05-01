@@ -134,7 +134,6 @@ import App from './App';
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
   }
   .navButton {
     color: #43aac4;
@@ -150,13 +149,11 @@ import App from './App';
     font-size: 24;
     text-align: center;
     color: #49a780;
-    
   }
   .buyButton {
     background-color: #43aac4;
     color: white;
     width: 75%;
-    
     border-radius: 100%;
     font-size: 18px;
     font-weight: 600;
@@ -187,7 +184,7 @@ import App from './App';
     font-size: 18;
   }
   .itemName {
-      word-wrap: wrap;
+    word-wrap: wrap;
   }
   .itemSpecs {
     font-size: 14;

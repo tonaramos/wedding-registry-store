@@ -12,7 +12,7 @@ export default new Vuex.Store({
     budget: 1000,
     totalPrice: 0,
   },
-  mutations: {          // use to commit and track state changes  // mutations update the state directly
+  mutations: {        
     SET_REGISTRY_NAME(state, payload) {
       state.registryName = payload.name;
       state.registryShortName = payload.shortName;
@@ -26,7 +26,7 @@ export default new Vuex.Store({
         if (item.id === obj.id) {
           const newItem = item;
           newItem.quantityAvailable = newItem.quantityAvailable + obj.quantity;
-          return newItem
+          return newItem;
         } else {
           return item;
         }
@@ -50,7 +50,6 @@ export default new Vuex.Store({
         newShoppingCart.push(newEntry);
       }
       state.shoppingCart = newShoppingCart;
-      // add to price ---------
       state.totalPrice = state.totalPrice + parseInt(itemAdded.price);
     },
     SET_NEW_BUDGET(state, payload) {
@@ -67,9 +66,8 @@ export default new Vuex.Store({
     },
   },
 
-  actions: {      //can update the state    // best practice for actions to call mutations 
-                  // use actions for any unsynchronous operations. 
-    fetchData(context) {  // context is passed automatically an has the commit method
+  actions: {
+    fetchData(context) {  
       context.commit('SET_REGISTRY_NAME', {name: data.name, shortName: data.shortName});
       context.commit('SET_ITEM_LIST', data.items);
     },
@@ -86,14 +84,13 @@ export default new Vuex.Store({
       context.commit('RESET_SHOPPING_CART', payload);
     }
   },
-  getters: {      // can access the store     you can have functions in the getters
+  getters: {   
     getName: state => state.registryName,
     getShortName: state => state.registryShortName,
     getItemList: state => state.itemList,
     getTotalPrice: state => state.totalPrice,
     getBudget: state => state.budget,
     getBudgetRemainder: state => state.budget - state.totalPrice,
-    // From StoreItem
     getItemsQuantity: state => state.itemList.map(item => {
       return {
         id: item.id,

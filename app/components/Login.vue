@@ -39,7 +39,8 @@
             </TextField>
           </StackLayout>
         </GridLayout>
-        <Button text='Log In' @tap="submit" class="btn-primary" />
+        <Label text="Please enter a valid Email" :class=" !user.validEmail && user.validationAttempted ? 'alertVisible' : 'alertNotVisible'" />
+        <Button text='Log In' @tap="logInHandler" class="btn-primary" />
         <Label *v-show="loggedIn" text="skip"
             class="login-label" @tap="goTo('ItemList')">
         </Label>
@@ -62,14 +63,35 @@ import routes from "../routes/index";
       focusEmail() {
         this.$refs.email.nativeView.focus();
       },
+      logInHandler() {
+        const validEmail = this.emailValidator(this.user.email);
+        this.$set(this.user, 'validEmail', validEmail);
+        this.$set(this.user, 'validationAttempted', true);
+        if (this.user.validationAttempted && !this.user.validEmail) {
+          this.$set(this.user, 'email', '');
+        } else  if (this.user.validationAttempted && this.user.validEmail) {
+          this.goTo('ItemList');
+        }
+      },
+      emailValidator(value) {
+        let isValid = null;
+        // Checking for two alphabetical values before @ followed by one alphabetical value followed by a . followed by one last alphabetical value
+        const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        isValid = pattern.test(value);
+        return isValid;
+      }
     },
     data() {
       return {
-        loggedIn: true,
         user: {
           name: '',
           email: '',
-          pasword: '',
+          password: '',
+          validName: true,
+          validEmail: true,
+          validPassword: true,
+          validationAttempted: false,
+          loggedIn: null,
         }
       }
     },
@@ -133,6 +155,18 @@ import routes from "../routes/index";
   }
   .sign-up-label {
       margin-bottom: 20px;
+  }
+  .alertVisible {
+    font-size: 16;
+    color: #da7434;
+    horizontal-align: center;
+    text-align: center;
+  }
+  .alertNotVisible {
+    visibility: hidden;
+    color: #da7434;
+    horizontal-align: center;
+    text-align: center;
   }
 
 </style>

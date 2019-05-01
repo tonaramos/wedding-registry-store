@@ -1,9 +1,12 @@
 <template>
   <flexboxLayout class="itemFrame">
-    <flexboxLayout class="itemSpecsFrame">  
-      <Image src="~/assets/images/cabinetIconImage.jpg" stretch="aspectFit" class="imageFrame" />
+    <flexboxLayout class="itemSpecsFrame">
+      <Image :src="$props.itemData.imageUrl" stretch="aspectFill" class="imageFrame" />
       <StackLayout class="itemInfoStack">
-        <Label textWrap="true" :text="$props.itemData.brand + '          ID:' + $props.itemData.id" class="itemBrand" />
+        <flexboxLayout class="itemBrandIdFrame">
+          <Label textWrap="true" :text="$props.itemData.brand" class="itemBrand" />
+          <Label textWrap="true" :text="'ID: ' + $props.itemData.id" class="itemId" />
+        </flexboxLayout>
         <Label textWrap="true" :text="$props.itemData.name" class="itemName" />
         <flexboxLayout class="itemPriceFrame">
           <Label textWrap="true" :text="'$' + $props.itemData.price" class="itemPrice" />
@@ -26,7 +29,6 @@
       this.updateAvailableQuantity();
       this.setItemAvailable();
       this.setBudgetAvailable();
-      // console.log('--------', this.$props.budget.budgetRemainder );
     },
     mounted() {
     },
@@ -47,7 +49,6 @@
       },
       updateBudgetAvailable() {
         this.$emit('updateBudgetInItemList', );
-        // console.log('thepassed budget emmiter ==++++++++++++++============>');
         this.setBudgetAvailable();
       },
       setBudgetAvailable() {
@@ -56,16 +57,9 @@
       addToCart() {
         if (this.status.itemAvailable && this.status.budgetAvailable ) {
             this.$store.dispatch('addItemToShoppingCart', this.$props.itemData);
-            this.updateAvailableQuantity();
+            this.$set(this.status, 'itemQuantity', this.status.itemQuantity - 1);
             this.setItemAvailable();
             this.updateBudgetAvailable();
-        //add the price to the total price in store
-        //subtract/update the item from the item list in store
-        //add the item to the shopping cart
-        //update the data (itemQuantity and ItemAvailable) of the item component
-        // this.$store.dispatch('decreaseItem', this.$props.itemData.id);
-        // console.log('add to cart button pressed!');
-        // console.log('did my state update???????? ', this.getShoppingCart.length );
         }
         
       }
@@ -86,16 +80,14 @@
       'getItemsQuantity',
       'getBudgetRemainder',
       'getShoppingCart',
-      ])
+      ]),
     },
     watch: {
       getBudgetRemainder(newBudget, oldBudget) {
-        // console.log('========================== FROM WATCH __ NEW BUDGET => ',newBudget);
         this.$set(this.status, 'currentBudget', newBudget);
         this.setBudgetAvailable();
       }
     }
-
   };
 </script>
 
@@ -106,7 +98,6 @@
     margin: 10;
     border: 10px black solid;
   }
-
   .itemSpecsFrame {
     flex-direction: row;
     justify-content: flex-start;
@@ -117,33 +108,34 @@
     margin-left: 15px;
     width: 70%;
   }
-
   .imageFrame {
     flex-basis: content;
     width: 30%;
     margin: 15px;
+  }
+  .itemBrandIdFrame {
+    justify-content: space-between;
   }
   .itemBrand {
     text-transform: capitalize;
     margin-top: 10px;
     margin-bottom: 15px;
   }
-
+  .itemId {
+    margin-right: 20;
+    font-size: 14;
+  }
   .itemName {
     font: 22;
     font-weight: bold;
-    /* text-align: justify; */
     margin-bottom: 15px;
   }
-
   .itemDescription { 
     font-size: 14;
-    /* text-align: justify; */
     margin-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
   }
-
   .itemPriceFrame {
     margin-bottom: 15px;
     font: 16;
@@ -152,16 +144,13 @@
   .itemPrice {
     text-transform: capitalize;
   }
-  
   .itemAvail {
     text-transform: capitalize;
   }
-
   .btnFrame {
     justify-content: center;
     margin-bottom: 15px;
   }
-
   .btnActive {
     background-color: #75c8dd;
     color: white;

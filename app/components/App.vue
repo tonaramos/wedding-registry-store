@@ -23,11 +23,6 @@ import routes from '../routes/index'
         this.$navigateTo(Login, { clearHistory: true });
       },
     },
-    data() {
-      return {
-        loginPage: Login,
-      }
-    },
     name: "App",
     components: {
       Login, 
@@ -36,13 +31,4 @@ import routes from '../routes/index'
 </script>
 
 <style scoped>
-  .app {
-    background-color: green;
-  }
-    .message {
-        vertical-align: center;
-        text-align: center;
-        font-size: 20;
-        color: #333333;
-    }
 </style>

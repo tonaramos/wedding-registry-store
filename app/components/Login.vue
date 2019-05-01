@@ -3,6 +3,7 @@
     <FlexboxLayout class="page" flexDirection="column" backgroundColor="#ffff">
       <stackLayout class="form">
         <Label class="header" :text="registryName"/>
+        <Label class="registryTitle" text="Wedding Registry"/>
         <GridLayout rows="auto, auto, auto">
           <StackLayout row="0" class="input-field">
             <TextField 
@@ -61,10 +62,6 @@ import routes from "../routes/index";
       focusEmail() {
         this.$refs.email.nativeView.focus();
       },
-      submit() {
-        // Check if input fields are correct
-        console.log('SUBMIT BUTTON PRESSED', this.user.name)
-      }
     },
     data() {
       return {
@@ -77,8 +74,6 @@ import routes from "../routes/index";
       }
     },
     name: "Login",
-    components: {
-    },
     computed: {
       registryName() {
         return this.$store.state.registryName;
@@ -92,50 +87,50 @@ import routes from "../routes/index";
     flex-Direction: column;
     align-items: center;
   }
-
   .form {
     margin-top: 15;
     margin-left: 30;
     margin-right: 30;
     flex-grow: 2;
-    vertical-align: top;
-    
+    vertical-align: top; 
   }
-
   .header {
     horizontal-align: center;
-    font-size: 25;
+    font-size: 35;
     font-weight: 600;
-    margin-bottom: 70;
+    margin-top: 35;
     text-align: center;
-    color: #f09c67;
+    /* color: #f09c67; */
+    color: #da7434;
   }
-
+  .registryTitle {
+    color: #f7a26e;
+    horizontal-align: center;
+    font-size: 18;
+    font-weight: 400;
+    /* color: #b15b25; */
+    margin-bottom: 30;
+  }
   .input-field {
       margin-bottom: 25px;
   }
-
   .input {
     font-size: 18px;
     placeholder-color: #A8A8A8;
   }
-
   .input:disabled {
     background-color: white;
     opacity: 0.5;
   }
-
   .btn-primary {
     background-Color: #4c8492;
-    margin: 30 5 15 5;
+    margin: 20 5 15 5;
   }
-
   .login-label {
-      horizontal-align: center;
-      color: #A8A8A8;
-      font-size: 16px;
+    horizontal-align: center;
+    color: #A8A8A8;
+    font-size: 16px;
   }
-
   .sign-up-label {
       margin-bottom: 20px;
   }

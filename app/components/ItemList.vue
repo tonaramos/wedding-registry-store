@@ -2,8 +2,8 @@
   <page>
     <FlexboxLayout class="frame">
       <FlexboxLayout class="infoBar">
-        <Label textWrap="true" :text="getShortName" class="message" />
-        <Button text="Cart" @tap="goTo('Cart')" />
+        <Label textWrap="true" :text="getShortName" class="pageTitle" />
+        <Button text="Cart" @tap="goTo('Cart')" class="navButton" />
       </FlexboxLayout>
       <ScrollView class="scrollViewFrame">
         <StackLayout>
@@ -19,7 +19,7 @@
         </StackLayout>
       </ScrollView>
       <FlexboxLayout class="infoBar">
-        <Label textWrap="true" :text="'Remaining: $' + status.budgetRemainder" class="message" />
+        <Label textWrap="true" :text="'Remaining: $' + status.budgetRemainder" class="remainder" />
       </FlexboxLayout>
     </FlexboxLayout>
   </page>
@@ -43,10 +43,7 @@ import { mapGetters } from 'vuex';
         this.$set(this.status, 'items', this.getItemList);
       },
       setBudgetRemainder() {
-        // update state with minus 
-        // console.log('store Budget remainder--=-=-=-=-=-=-==-=-=-> ', this.getBudgetRemainder);
         this.$set(this.status, 'budgetRemainder', this.getBudgetRemainder);
-        // console.log('data Budget remainder--=-=-=-=-=-=-==-=-=-> ', this.status.budgetRemainder);
       },
     },
     data() {
@@ -75,33 +72,51 @@ import { mapGetters } from 'vuex';
   .frame {
     flex-direction: column;
     align-items: center;
-    vertical-align: top;
+    justify-content: center;
     width: 100%;
     height: 100%;
     background-color: #fcf9f7;
   }
-  .message {
-    vertical-align: center;
-    text-align: center;
-    font-size: 20px;
-    color: red;
+  .infoBar {
+    width: 100%;
+    height: 7%;
+    justify-content: space-between;
+    background-color:rgb(252, 234, 186); 
+  }
+  .navButton {
+    color: #2baccc;
+    font-weight: 500;
+    margin: 7;
+    margin-right: 50;
+    color: #43aac4;
+    font-size: 21;
+    height: 26;
+  }
+  .pageTitle {
+    color: #b67c00;
+    font-weight: 700;
+    margin: 7;
+    margin-left: 50;
+    font-size: 24;
+    height: 26;
+  }
+  .remainder {
+    color: #b67c00;
+    font-weight: 400;
+    margin: 7;
+    margin-right: 20%;
+    margin-left: 50;
+    font-size: 20;
+    align-self: center
   }
   .scrollViewFrame {
-    background-color: whitesmoke;
+    background-color: rgb(241, 240, 240);
     height: 86%;
   }
-
   .storeItem {
     width: auto;
     background-color: #f8feff;
     border-bottom-width: 3px;
     border-bottom-color: rgb(220, 220, 220);
   }
-  .infoBar {
-    width: 100%;
-    height: 7%;
-    justify-content: space-between;
-    background-color: darkgoldenrod;
-  }
-
 </style>

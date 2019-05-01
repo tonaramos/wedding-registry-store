@@ -52,7 +52,19 @@ export default new Vuex.Store({
       state.shoppingCart = newShoppingCart;
       // add to price ---------
       state.totalPrice = state.totalPrice + parseInt(itemAdded.price);
-    }
+    },
+    SET_NEW_BUDGET(state, payload) {
+      state.budget = payload;
+    },
+    RESET_TOTAL_PRICE(state, payload) {
+      state.totalPrice = payload;
+    },
+    RESET_TOTAL_PRICE(state, payload) {
+      state.totalPrice = payload;
+    },
+    RESET_SHOPPING_CART(state, payload) {
+      state.shoppingCart = payload;
+    },
   },
 
   actions: {      //can update the state    // best practice for actions to call mutations 
@@ -63,12 +75,23 @@ export default new Vuex.Store({
     },
     addItemToShoppingCart(context, item) {
       context.commit('UPDATE_SHOPPING_CART', item);
+    },
+    setNewBudget(context, payload) {
+      context.commit('SET_NEW_BUDGET', payload);
+    },
+    resetTotalPrice(context, payload) {
+      context.commit('RESET_TOTAL_PRICE', payload);
+    },
+    clearShoppingCart(context, payload) {
+      context.commit('RESET_SHOPPING_CART', payload);
     }
   },
   getters: {      // can access the store     you can have functions in the getters
     getName: state => state.registryName,
     getShortName: state => state.registryShortName,
     getItemList: state => state.itemList,
+    getTotalPrice: state => state.totalPrice,
+    getBudget: state => state.budget,
     getBudgetRemainder: state => state.budget - state.totalPrice,
     // From StoreItem
     getItemsQuantity: state => state.itemList.map(item => {
